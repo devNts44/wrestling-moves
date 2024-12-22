@@ -11,7 +11,7 @@
 	<groupId>com.wrestling-moves</groupId>
 	<artifactId>wresling-moves</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>WreslingMovesApp</name>
+	<name>WrestlingMovesApp</name>
 	<description>app to stock wrestling moves with description</description>
 	<url/>
 	<licenses>

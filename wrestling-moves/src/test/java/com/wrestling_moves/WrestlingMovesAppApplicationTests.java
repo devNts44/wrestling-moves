@@ -1,13 +1,18 @@
-package com.wrestling_moves.wresling_moves;
+package com.wrestling_moves;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class WreslingMovesAppApplicationTests {
+class WrestlingMovesAppApplicationTests {
 
 	@Test
 	void contextLoads() {
+	}
+
+	@Test
+	void printHelloWorld(){
+
 	}
 
 }
