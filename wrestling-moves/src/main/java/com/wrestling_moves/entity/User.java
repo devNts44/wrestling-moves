@@ -2,6 +2,8 @@ package com.wrestling_moves.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "USER")
 public class User {
@@ -25,7 +27,6 @@ public class User {
     @Column(name = "last_name", length = 50)
     private String lastName;
 
-    // Constructeurs
     public User() {
     }
 
@@ -69,6 +70,16 @@ public class User {
         this.email = email;
     }
 
+    public String getName() {
+        return this.firstName + " " + this.lastName;
+    }
+
+    public void setName(String name) {
+        String[] parts = name.split(" ");
+        this.firstName = parts[0];
+        this.lastName = parts[1];
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -85,7 +96,20 @@ public class User {
         this.lastName = lastName;
     }
 
-    // toString()
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o)
+            return true;
+        if (!(o instanceof User))
+            return false;
+        User user = (User) o;
+        return Objects.equals(this.id, user.id)
+                && Objects.equals(this.firstName, user.firstName)
+                && Objects.equals(this.lastName, user.lastName)
+                && Objects.equals(this.email, user.email)
+                && Objects.equals(this.username, user.username);
+    }
     @Override
     public String toString() {
         return "User{" +
