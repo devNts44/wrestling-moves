@@ -25,19 +25,19 @@ public class WrestlerController {
 
 
     @PostMapping("/wrestlers")
-    Wrestler newUser(@RequestBody Wrestler newWrestler) {
+    Wrestler newWrestler(@RequestBody Wrestler newWrestler) {
         return wrestlerService.saveWrestler(newWrestler);
     }
 
     @GetMapping("/wrestlers/{id}")
-    Wrestler searchUser(@PathVariable Long id) {
+    Wrestler searchWrestler(@PathVariable Long id) {
 
         return wrestlerService.findWrestler(id)
                 .orElseThrow(() -> new WrestlerNotFoundException(id));
     }
 
     @PutMapping("/wrestlers/{id}")
-    Wrestler replaceUser(@RequestBody Wrestler newWrestler, @PathVariable Long id) {
+    Wrestler replaceWrestler(@RequestBody Wrestler newWrestler, @PathVariable Long id) {
 
         return wrestlerService.findWrestler(id)
                 .map(wrestler -> {
