@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "USER")
-public class User {
+@Table(name = "WRESTLER")
+public class Wrestler {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +27,10 @@ public class User {
     @Column(name = "last_name", length = 50)
     private String lastName;
 
-    public User() {
+    public Wrestler() {
     }
 
-    public User(String username, String password, String email, String firstName, String lastName) {
+    public Wrestler(String username, String password, String email, String firstName, String lastName) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -101,18 +101,18 @@ public class User {
 
         if (this == o)
             return true;
-        if (!(o instanceof User))
+        if (!(o instanceof Wrestler))
             return false;
-        User user = (User) o;
-        return Objects.equals(this.id, user.id)
-                && Objects.equals(this.firstName, user.firstName)
-                && Objects.equals(this.lastName, user.lastName)
-                && Objects.equals(this.email, user.email)
-                && Objects.equals(this.username, user.username);
+        Wrestler wrestler = (Wrestler) o;
+        return Objects.equals(this.id, wrestler.id)
+                && Objects.equals(this.firstName, wrestler.firstName)
+                && Objects.equals(this.lastName, wrestler.lastName)
+                && Objects.equals(this.email, wrestler.email)
+                && Objects.equals(this.username, wrestler.username);
     }
     @Override
     public String toString() {
-        return "User{" +
+        return "Wrestler{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
