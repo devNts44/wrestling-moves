@@ -26,29 +26,29 @@ public class WrestlerController {
 
     @PostMapping("/wrestlers")
     Wrestler newUser(@RequestBody Wrestler newWrestler) {
-        return wrestlerService.saveUser(newWrestler);
+        return wrestlerService.saveWrestler(newWrestler);
     }
 
     @GetMapping("/wrestlers/{id}")
     Wrestler searchUser(@PathVariable Long id) {
 
-        return wrestlerService.findUser(id)
+        return wrestlerService.findWrestler(id)
                 .orElseThrow(() -> new WrestlerNotFoundException(id));
     }
 
     @PutMapping("/wrestlers/{id}")
     Wrestler replaceUser(@RequestBody Wrestler newWrestler, @PathVariable Long id) {
 
-        return wrestlerService.findUser(id)
+        return wrestlerService.findWrestler(id)
                 .map(wrestler -> {
                     wrestler.setName(newWrestler.getName());
-                    return wrestlerService.saveUser(wrestler);
+                    return wrestlerService.saveWrestler(wrestler);
                 })
-                .orElseGet(() -> wrestlerService.saveUser(newWrestler));
+                .orElseGet(() -> wrestlerService.saveWrestler(newWrestler));
     }
 
     @DeleteMapping("/wrestlers/{id}")
-    void deleteUser(@PathVariable Long id) {
-        wrestlerService.deleteUser(id);
+    void deleteWrestler(@PathVariable Long id) {
+        wrestlerService.deleteWrestler(id);
     }
 }

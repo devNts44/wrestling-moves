@@ -18,15 +18,15 @@ public class WrestlerService {
         return wrestlerRepository.findAll();
     }
 
-    public Optional<Wrestler> findUser(Long id){
+    public Optional<Wrestler> findWrestler(Long id){
         return wrestlerRepository.findById(id);
     }
 
-    public void deleteUser(Long id){
+    public void deleteWrestler(Long id){
         wrestlerRepository.deleteById(id);
     }
 
-    public Wrestler saveUser(Wrestler wrestler){
+    public Wrestler saveWrestler(Wrestler wrestler){
         return wrestlerRepository.save(wrestler);
     }
 }
