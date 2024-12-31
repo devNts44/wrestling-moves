@@ -1,6 +1,9 @@
 package com.wrestling_moves.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 import java.util.Objects;
 
@@ -12,19 +15,29 @@ public class Wrestler {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Le nom d'utilisateur est obligatoire")
     @Column(nullable = false, unique = true, length = 50)
+    @Pattern(regexp="^[a-zA-Z0-9]+$")
     private String username;
 
+    @NotBlank(message = "Le mot de passe est obligatoire")
     @Column(nullable = false)
+    @Pattern(regexp="^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")
     private String password;
 
+    @Email(message = "L'email doit être valide")
+    @NotBlank(message = "L'email est obligatoire")
     @Column(nullable = false)
     private String email;
 
+    @NotBlank(message = "Le prénom est obligatoire")
     @Column(name = "first_name", length = 50)
+    @Pattern(regexp="^[a-zA-Z0-9]+$")
     private String firstName;
 
+    @NotBlank(message = "Le nom de famille est obligatoire")
     @Column(name = "last_name", length = 50)
+    @Pattern(regexp="^[a-zA-Z0-9]+$")
     private String lastName;
 
     public Wrestler() {
@@ -72,12 +85,6 @@ public class Wrestler {
 
     public String getName() {
         return this.firstName + " " + this.lastName;
-    }
-
-    public void setName(String name) {
-        String[] parts = name.split(" ");
-        this.firstName = parts[0];
-        this.lastName = parts[1];
     }
 
     public String getFirstName() {
