@@ -4,12 +4,11 @@ import com.wrestling_moves.entity.Wrestler;
 import com.wrestling_moves.exceptions.WrestlerNotFoundException;
 
 import com.wrestling_moves.service.WrestlerService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class WrestlerController {
 
     private final WrestlerService wrestlerService; //récupérer les données depuis la DB (grâce au repo) pour les traiter.
@@ -41,11 +40,16 @@ public class WrestlerController {
 
         return wrestlerService.findWrestler(id)
                 .map(wrestler -> {
-                    wrestler.setName(newWrestler.getName());
+                    wrestler.setFirstName(newWrestler.getFirstName());
+                    wrestler.setLastName(newWrestler.getLastName());
+                    wrestler.setUsername(newWrestler.getUsername());
+                    wrestler.setEmail(newWrestler.getEmail());
+                    wrestler.setPassword(newWrestler.getPassword());
                     return wrestlerService.saveWrestler(wrestler);
                 })
                 .orElseGet(() -> wrestlerService.saveWrestler(newWrestler));
     }
+
 
     @DeleteMapping("/wrestlers/{id}")
     void deleteWrestler(@PathVariable Long id) {
