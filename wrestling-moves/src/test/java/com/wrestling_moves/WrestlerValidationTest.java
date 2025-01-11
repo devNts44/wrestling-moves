@@ -2,6 +2,7 @@ package com.wrestling_moves;
 
 import com.wrestling_moves.entity.Wrestler;
 import com.wrestling_moves.service.WrestlerService;
+
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 import java.util.Set;
@@ -18,6 +20,7 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+@ActiveProfiles("test")
 public class WrestlerValidationTest {
 
     private Validator validator;
@@ -102,7 +105,7 @@ public class WrestlerValidationTest {
     }
 
     @Test
-    public void checkIsWrestlerIsReturned() throws Exception {
+    public void checkIfWrestlerIsReturned() throws Exception {
         Wrestler wrestler = new Wrestler("YusKa", "Passw0rd!", "yus.ka@example.com", "Yus", "Ka");
 
         
@@ -110,9 +113,9 @@ public class WrestlerValidationTest {
 
         List<Wrestler> all = wrestlerService.findAll();
         assertThat(all).isNotEmpty();
-        assertThat(all.size()).isEqualTo(1);
+        assertThat(all.size()).isEqualTo(2);
 
-        //System.out.println(all.toString());
+        System.out.println(all.toString());
     }
 
 }

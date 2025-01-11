@@ -5,11 +5,13 @@ import com.wrestling_moves.entity.Wrestler;
 import com.wrestling_moves.service.WrestlerService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import org.springframework.http.MediaType;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -26,12 +28,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@TestPropertySource(properties = "spring.jpa.hibernate.ddl-auto=none")
+@ActiveProfiles("test")
 class WrestlerControllerTest {
 
 	@Autowired
 	private WrestlerService wrestlerService;
-
 
 	@InjectMocks
 	private WrestlerController wrestlerController;
@@ -41,7 +42,7 @@ class WrestlerControllerTest {
 
 	@Transactional
 	@Test
-	void  shouldLoadWrestlerControllerIntoContext() throws Exception {
+	void  shouldLoadWrestlerControllerIntoContext() {
 		assertThat(wrestlerController).isNotNull();
 	}
 
@@ -105,7 +106,7 @@ class WrestlerControllerTest {
     }
 	@Transactional
 	@Test
-	public void checkIsWrestlerIsReturned() throws Exception {
+	public void checkIfWrestlerIsReturned() {
 		//Wrestler wrestler = new Wrestler("johndoe","securepassword", "johndoe@example.com", "John", "Doe");
 
 		//wrestlerService.saveWrestler(wrestler);
@@ -113,7 +114,7 @@ class WrestlerControllerTest {
 		assertThat(all).isNotEmpty();
 		assertThat(all.size()).isEqualTo(1);
 
-		//System.out.println(all.toString());
+		System.out.println(all);
 	}
 
 	@Transactional
@@ -126,9 +127,9 @@ class WrestlerControllerTest {
             "password": "Passw0rd!",
             "email": "john.doe@domain.com",
             "firstName": "John",
-            "lastName": "Doe"  
+            "lastName": "Doe" \s
         }
-    	""";
+    \t""";
 		mvc.perform(MockMvcRequestBuilders.post("/wrestlers")
 						.content(wrestler)
 						.contentType(MediaType.APPLICATION_JSON))
@@ -136,30 +137,4 @@ class WrestlerControllerTest {
 				.andExpect(MockMvcResultMatchers.content()
 						.contentType(textPlainUtf8));
 	}
-
-	/*@Transactional
-    @Test
-    public void shouldValidateWrestlerFields() throws Exception {
-		mvc.perform(post("/wrestlers")
-		.contentType(MediaType.APPLICATION_JSON)
-		.content("{" +
-				"\"username\":\"\"," +
-				"\"password\":\"\"," +
-				"\"email\":\"invalid-email\"," +
-				"\"firstName\":\"\"," +
-				"\"lastName\":\"\"" +
-				"}"))
-		//.andExpect(status().isBadRequest())
-		.andExpect(jsonPath("$.errors").isArray())
-		.andExpect(jsonPath("$.errors[?(@.field=='username')].message").value("Le nom d'utilisateur est obligatoire"))
-		.andExpect(jsonPath("$.errors[?(@.field=='password')].message").value("Le mot de passe est obligatoire"))
-		.andExpect(jsonPath("$.errors[?(@.field=='email')].message").value("L'email doit être valide"))
-		.andExpect(jsonPath("$.errors[?(@.field=='firstName')].message").value("Le prénom est obligatoire"))
-		.andExpect(jsonPath("$.errors[?(@.field=='lastName')].message").value("Le nom de famille est obligatoire"));
-    
-	@Test
-	public void getMappingWrestlersIsOk() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.get("/wrestlers").accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk());
-	}*/
 }

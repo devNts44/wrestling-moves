@@ -1,14 +1,16 @@
 package com.wrestling_moves.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+
+@Controller
 public class HomeController {
 
     @GetMapping("/")
-    String Hello(){
-        return "mainPage";
+    public String home(Model model) {
+        return "mainPage"; // Correspond au fichier mainPage.html dans le dossier templates
     }
 
 

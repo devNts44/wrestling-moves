@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Wrestler {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Long id;
 
     @NotBlank(message = "Le nom d'utilisateur est obligatoire")
@@ -110,7 +110,9 @@ public class Wrestler {
             return true;
         if (!(o instanceof Wrestler))
             return false;
-        Wrestler wrestler = (Wrestler) o;
+        Wrestler
+
+                wrestler = (Wrestler) o;
         return Objects.equals(this.id, wrestler.id)
                 && Objects.equals(this.firstName, wrestler.firstName)
                 && Objects.equals(this.lastName, wrestler.lastName)

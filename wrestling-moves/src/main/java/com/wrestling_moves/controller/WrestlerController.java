@@ -53,6 +53,6 @@ public class WrestlerController {
 
     @DeleteMapping("/wrestlers/{id}")
     void deleteWrestler(@PathVariable Long id) {
-        wrestlerService.deleteWrestler(id);
+        wrestlerService.delete(id);
     }
 }
