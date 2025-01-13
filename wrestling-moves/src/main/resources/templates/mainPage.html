@@ -8,19 +8,22 @@
 </head>
 <body>
 
-<header class="header">
-    <div class="logo-container">
-        <img src="images/logoWrestling.png" alt="Wrestling logo" title="Wrestling logo"
-             th:src="@{/images/logoWrestling.png}" />
-    </div>
-    <div class="banner">
+    <header class="header">
+        <div class="logo-container">
+            <img src="images/logoWrestling.png" alt="Wrestling logo" title="Wrestling logo"
+                 th:src="@{/images/logoWrestling.png}" />
+        </div>
+        <nav class="nav-menu">
+            <a href="#" th:href="@{/login}" class="login-btn">Login</a>
+        </nav>
+    </header>
+    
+    <div class="hero-section">
         <h1>Welcome to Wrestling Movements</h1>
         <div class="banner-video">
             <iframe src="https://www.instagram.com/reel/DEhrASZsGm4/embed" width="400" height="480"></iframe>
         </div>
-        <li><a href="#" th:href="@{/login}">Login</a></li>
     </div>
-</header>
 
 <!-- Section principale -->
 <main class="main-content">
