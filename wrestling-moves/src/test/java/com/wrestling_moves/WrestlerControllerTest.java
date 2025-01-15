@@ -26,9 +26,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
+@ActiveProfiles("test")
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("test")
 class WrestlerControllerTest {
 
 	@Autowired
@@ -53,7 +53,7 @@ class WrestlerControllerTest {
 				.andExpect(status().isOk());
 	}
 
-	@Transactional
+	//@Transactional
 	@Test
     public void shouldGetAllWrestlers() throws Exception {
         mvc.perform(get("/wrestlers")
@@ -83,13 +83,25 @@ class WrestlerControllerTest {
 	@Transactional
 	@Test
 	public void shouldGetWrestlerById() throws Exception {
-		mvc.perform(get("/wrestlers/1")
-			.contentType(MediaType.APPLICATION_JSON))
-			.andExpect(status().isOk())
-			.andExpect(jsonPath("$.id").value(1));
+
+		Wrestler wrestler = new Wrestler();
+		wrestler.setUsername("testUser");
+		wrestler.setPassword("Passw0rd!");
+		wrestler.setEmail("test@example.com");
+		wrestler.setFirstName("Test");
+		wrestler.setLastName("User");
+		Wrestler savedWrestler = wrestlerService.saveWrestler(wrestler);
+
+		Long id = savedWrestler.getId();
+
+		mvc.perform(get("/wrestlers/" + id)
+						.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.id").value(id.intValue()));
 	}
 
-	@Transactional
+
+	//@Transactional
     @Test
     public void shouldReturn404WhenWrestlerNotFound() throws Exception {
         mvc.perform(get("/wrestlers/999")
@@ -107,17 +119,26 @@ class WrestlerControllerTest {
 	@Transactional
 	@Test
 	public void checkIfWrestlerIsReturned() {
-		//Wrestler wrestler = new Wrestler("johndoe","securepassword", "johndoe@example.com", "John", "Doe");
+		// Ajouter un lutteur pour garantir des données dans la base de données
+		Wrestler wrestler = new Wrestler();
+		wrestler.setUsername("testUser3");
+		wrestler.setPassword("Passw0rd!");
+		wrestler.setEmail("test3@example.com");
+		wrestler.setFirstName("Test3");
+		wrestler.setLastName("User3");
+		wrestlerService.saveWrestler(wrestler);
 
-		//wrestlerService.saveWrestler(wrestler);
+		// Récupérer tous les lutteurs
 		List<Wrestler> all = wrestlerService.findAll();
+
+		// Vérifier que la liste n'est pas vide et contient bien un élément
 		assertThat(all).isNotEmpty();
-		assertThat(all.size()).isEqualTo(1);
+		assertThat(all.size()).isEqualTo(1); // Vérifie qu'il y a exactement 1 lutteur
 
 		System.out.println(all);
 	}
 
-	@Transactional
+	//@Transactional
 	@Test
 	public void whenPostRequestToWrestlerAndValidWrestler_thenCorrectResponse() throws Exception {
 		MediaType textPlainUtf8 = new MediaType(MediaType.APPLICATION_JSON);
