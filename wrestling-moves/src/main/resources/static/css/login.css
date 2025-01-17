@@ -1,0 +1,78 @@
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.logo-container {
+    margin-bottom: 30px;
+}
+
+.logo-container img {
+    max-width: 200px;
+    height: auto;
+}
+
+.form-container {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.form-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.btn-login {
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+}
+
+.remember-me {
+    margin: 15px 0;
+}
+
+.register-link {
+    margin-top: 15px;
+}
+
+/* Ajout de quelques effets hover */
+.btn-login:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.register-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .login-container {
+        margin: 20px auto;
+        padding: 10px;
+    }
+    
+    .form-container {
+        padding: 15px;
+    }
+    
+    .logo-container img {
+        max-width: 150px;
+    }
+} 

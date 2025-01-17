@@ -1,0 +1,97 @@
+.register-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.logo-container {
+    margin-bottom: 30px;
+}
+
+.logo-container img {
+    max-width: 200px;
+    height: auto;
+}
+
+.form-container {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.form-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    margin-bottom: 15px;
+}
+
+.btn-register {
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+}
+
+.login-link {
+    margin-top: 15px;
+}
+
+/* Effets hover */
+.btn-register:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.login-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Messages d'alerte */
+.alert {
+    margin-bottom: 20px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .register-container {
+        margin: 20px auto;
+        padding: 10px;
+    }
+    
+    .form-container {
+        padding: 15px;
+    }
+    
+    .logo-container img {
+        max-width: 150px;
+    }
+}
