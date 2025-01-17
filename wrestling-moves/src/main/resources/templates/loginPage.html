@@ -7,39 +7,51 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
         crossorigin="anonymous" />
+  <link rel="stylesheet" th:href="@{/css/login.css}" />
 </head>
 <body>
-<div class="container-fluid text-center">
-  <div>
-    <img src="images/logoWrestling.png" alt="Wrestling logo" title="Wrestling logo"
+<div class="login-container">
+  <div class="logo-container text-center">
+    <img src="images/logoWrestling.png" alt="Wrestling logo" 
          th:src="@{/images/logoWrestling.png}" />
   </div>
-  <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto;">
 
-    <div th:if="${param.error}">
-      <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
-    </div>
+  <div th:if="${param.error}" class="alert alert-danger">
+    <p>[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+  </div>
 
-    <div th:if="${param.logout}">
-      <p class="text-warning">You have been logged out.</p>
-    </div>
+  <div th:if="${param.logout}" class="alert alert-warning">
+    <p>Vous avez été déconnecté.</p>
+  </div>
 
-    <div class="border border-secondary p-3 rounded">
-      <p>Access to Wrestling Movements Application</p>
-      <p>
-        <input type="email" name="email" class="form-control" placeholder="E-mail" required autofocus/>
-      </p>
-      <p>
-        <input type="password" name="password" class="form-control" placeholder="Password" required />
-      </p>
-      <p>
-        <input type="checkbox" name="remember-me" />&nbsp;Remember Me
-      </p>
-      <p>
-        <input type="submit" value="Login" class="btn btn-primary" />
-      </p>
-    </div>
-  </form>
+  <div class="form-container">
+    <h2 class="form-title text-center">Accès à Wrestling Movements</h2>
+    
+    <form th:action="@{/login}" method="post">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" class="form-control" 
+               placeholder="Votre email" required autofocus/>
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" class="form-control" 
+               placeholder="Votre mot de passe" required/>
+      </div>
+      
+      <div class="remember-me">
+        <input type="checkbox" id="remember-me" name="remember-me"/>
+        <label for="remember-me">Se souvenir de moi</label>
+      </div>
+      
+      <button type="submit" class="btn btn-primary btn-login">Se connecter</button>
+      
+      <div class="register-link text-center">
+        Pas encore de compte? <a th:href="@{/register}">S'inscrire</a>
+      </div>
+    </form>
+  </div>
 </div>
 </body>
 </html>
