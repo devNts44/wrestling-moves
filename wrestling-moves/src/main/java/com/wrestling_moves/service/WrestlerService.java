@@ -23,6 +23,9 @@ public class WrestlerService {
     public Optional<Wrestler> findWrestler(Long id){
         return wrestlerRepository.findById(id);
     }
+    public Optional<Wrestler> findByEmail(String email) {
+        return wrestlerRepository.findByEmail(email);
+    }
 
     public void delete(Long id){
         wrestlerRepository.deleteById(id);

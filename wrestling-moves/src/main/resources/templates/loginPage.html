@@ -37,7 +37,7 @@
       <div class="form-group">
         <label for="password">Mot de passe</label>
         <input type="password" id="password" name="password" class="form-control" 
-               placeholder="Votre mot de passe" required/>
+               placeholder="Votre mot de passe" autocomplete="new-password" required/>
       </div>
       
       <div class="remember-me">
@@ -48,7 +48,7 @@
       <button type="submit" class="btn btn-primary btn-login">Se connecter</button>
       
       <div class="register-link text-center">
-        Pas encore de compte? <a th:href="@{/register}">S'inscrire</a>
+        Pas encore de compte? <a th:href="@{/register/save}">S'inscrire</a>
       </div>
     </form>
   </div>
