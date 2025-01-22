@@ -30,7 +30,7 @@ public class RegisterController {
         return "registerPage";
     }
 
-    @PostMapping("/register/save ")
+    @PostMapping("/register/save")
     public String saveWrestlerRegistration(
             @Valid @ModelAttribute("wrestler") Wrestler wrestler,
             BindingResult result,
@@ -41,7 +41,7 @@ public class RegisterController {
         }
 
         if (wrestlerService.findByEmail(wrestler.getEmail()).isPresent()) {
-            model.addAttribute("error", "Un compte avec cet email existe déjà.");
+            model.addAttribute("errorMessage", "Un compte avec cet email existe déjà.");
             return "registerPage";
         }
 
