@@ -4,6 +4,7 @@ import com.wrestling_moves.entity.Wrestler;
 import com.wrestling_moves.exceptions.WrestlerNotFoundException;
 
 import com.wrestling_moves.service.WrestlerService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class WrestlerController {
 
 
     @PostMapping("/wrestlers")
-    Wrestler newWrestler(@RequestBody Wrestler newWrestler) {
+    Wrestler newWrestler(@Valid @RequestBody Wrestler newWrestler) {
         return wrestlerService.saveWrestler(newWrestler);
     }
 
@@ -36,7 +37,7 @@ public class WrestlerController {
     }
 
     @PutMapping("/wrestlers/{id}")
-    Wrestler replaceWrestler(@RequestBody Wrestler newWrestler, @PathVariable Long id) {
+    Wrestler replaceWrestler(@Valid @RequestBody Wrestler newWrestler, @PathVariable Long id) {
 
         return wrestlerService.findWrestler(id)
                 .map(wrestler -> {

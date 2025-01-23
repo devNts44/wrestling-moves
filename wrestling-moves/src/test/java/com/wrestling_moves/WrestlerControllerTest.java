@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @ActiveProfiles("test")
 @SpringBootTest
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false)//pour désactiver spring security afin qu'il ne redirige pas vers la login page
 class WrestlerControllerTest {
 
 	@Autowired
