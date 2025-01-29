@@ -12,16 +12,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import static com.wrestling_moves.utils.PasswordUtils.isValidPassword;
+
 @Controller
 public class RegisterController {
 
     private final WrestlerService wrestlerService;
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public RegisterController(WrestlerService wrestlerService, PasswordEncoder passwordEncoder) {
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public RegisterController(WrestlerService wrestlerService) {
         this.wrestlerService = wrestlerService;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/register/save")
@@ -45,11 +48,17 @@ public class RegisterController {
             return "registerPage";
         }
 
-        //Hacher le mot de passe
-        wrestler.setPassword(passwordEncoder.encode(wrestler.getPassword()));
+        //Valide le mot de passe brut avant l'encodage
+        if (!isValidPassword(wrestler.getPassword())) {
+            throw new IllegalArgumentException("Mot de passe non conforme aux règles de sécurité.");
+        }
+
+        String hashedPassword = passwordEncoder.encode(wrestler.getPassword());
+        wrestler.setPassword(hashedPassword);
 
         wrestlerService.saveWrestler(wrestler);
 
         return "redirect:/login";
     }
+
 }

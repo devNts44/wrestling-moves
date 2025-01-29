@@ -17,12 +17,15 @@ public class Wrestler {
 
     @NotBlank(message = "Le nom d'utilisateur est obligatoire")
     @Column(nullable = false, unique = true, length = 50)
-    @Pattern(regexp="^[a-zA-Z0-9]+$")
+    @Pattern(regexp="^[a-zA-Z0-9_]+$")
     private String username;
 
     @NotBlank(message = "Le mot de passe est obligatoire")
     @Column(nullable = false)
-    @Pattern(regexp="^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")
+    @Pattern(
+            regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
+            message = "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre, un caractère spécial (@$!%*?&) et comporter au moins 8 caractères."
+    )
     private String password;
 
     @Email(message = "L'email doit être valide")
