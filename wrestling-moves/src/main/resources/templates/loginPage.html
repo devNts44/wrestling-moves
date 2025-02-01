@@ -26,7 +26,11 @@
 
   <div class="form-container">
     <h2 class="form-title text-center">Accès à Wrestling Movements</h2>
-    
+
+    <a href="/oauth2/authorization/google">
+      <button>Se connecter avec Google</button>
+    </a>
+
     <form th:action="@{/login}" method="post">
       <div class="form-group">
         <label for="email">Email</label>

@@ -23,8 +23,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                //.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/","/register/save","/login","/css/**", "/images/**").permitAll()
+                        .requestMatchers("/dashboard").authenticated()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
@@ -35,8 +37,13 @@ public class SecurityConfig {
                         .failureUrl("/login?error=true")
                         .permitAll()
                 )
-                .logout((logout) -> logout.permitAll());
-
+                .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/dashboard", true)
+                )
+                .logout((logout) -> logout.logoutUrl("/logout").logoutSuccessUrl("/").permitAll())
+                .exceptionHandling(ex -> ex
+                                    .accessDeniedPage("/dashboard"));
         return http.build();
     }
 
