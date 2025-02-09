@@ -5,11 +5,13 @@ import com.wrestling_moves.exceptions.WrestlerNotFoundException;
 
 import com.wrestling_moves.service.WrestlerService;
 import jakarta.validation.Valid;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class WrestlerController {
 
     private final WrestlerService wrestlerService; //récupérer les données depuis la DB (grâce au repo) pour les traiter.
@@ -19,38 +21,12 @@ public class WrestlerController {
     }
 
     @GetMapping("/wrestlers")
-    List<Wrestler> findAll() {
-        return wrestlerService.findAll();
+    public String displayWrestlers(Model model){
+       List<Wrestler> wrestlers = wrestlerService.findAll();
+       model.addAttribute("wrestlers",wrestlers);
+
+       return "wrestlersPage";
     }
-
-
-    @PostMapping("/wrestlers")
-    Wrestler newWrestler(@Valid @RequestBody Wrestler newWrestler) {
-        return wrestlerService.saveWrestler(newWrestler);
-    }
-
-    @GetMapping("/wrestlers/{id}")
-    Wrestler searchWrestler(@PathVariable Long id) {
-
-        return wrestlerService.findWrestler(id)
-                .orElseThrow(() -> new WrestlerNotFoundException(id));
-    }
-
-    @PutMapping("/wrestlers/{id}")
-    Wrestler replaceWrestler(@Valid @RequestBody Wrestler newWrestler, @PathVariable Long id) {
-
-        return wrestlerService.findWrestler(id)
-                .map(wrestler -> {
-                    wrestler.setFirstName(newWrestler.getFirstName());
-                    wrestler.setLastName(newWrestler.getLastName());
-                    wrestler.setUsername(newWrestler.getUsername());
-                    wrestler.setEmail(newWrestler.getEmail());
-                    wrestler.setPassword(newWrestler.getPassword());
-                    return wrestlerService.saveWrestler(wrestler);
-                })
-                .orElseGet(() -> wrestlerService.saveWrestler(newWrestler));
-    }
-
 
     @DeleteMapping("/wrestlers/{id}")
     void deleteWrestler(@PathVariable Long id) {

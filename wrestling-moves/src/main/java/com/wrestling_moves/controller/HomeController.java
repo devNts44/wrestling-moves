@@ -12,6 +12,4 @@ public class HomeController {
     public String home(Model model) {
         return "mainPage"; // Correspond au fichier mainPage.html dans le dossier templates
     }
-
-
 }
