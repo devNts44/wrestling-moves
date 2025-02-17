@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import static com.wrestling_moves.utils.PasswordUtils.isValidPassword;
-
 @Controller
 public class RegisterController {
 
@@ -40,6 +38,9 @@ public class RegisterController {
             Model model) {
 
         if (result.hasErrors()) {
+            result.getAllErrors().forEach(error -> 
+                model.addAttribute("errorMessage", error.getDefaultMessage())
+            );
             return "registerPage";
         }
 
@@ -48,17 +49,17 @@ public class RegisterController {
             return "registerPage";
         }
 
-        //Valide le mot de passe brut avant l'encodage
-        if (!isValidPassword(wrestler.getPassword())) {
-            throw new IllegalArgumentException("Mot de passe non conforme aux règles de sécurité.");
+        try {
+            String hashedPassword = passwordEncoder.encode(wrestler.getPassword());
+            wrestler.setPassword(hashedPassword);
+            wrestlerService.saveWrestler(wrestler);
+            return "redirect:/login";
+        } catch (Exception e) {
+            System.err.println("Erreur lors de l'inscription: " + e.getMessage());
+            model.addAttribute("errorMessage", 
+                "Une erreur est survenue lors de l'inscription: " + e.getMessage());
+            return "registerPage";
         }
-
-        String hashedPassword = passwordEncoder.encode(wrestler.getPassword());
-        wrestler.setPassword(hashedPassword);
-
-        wrestlerService.saveWrestler(wrestler);
-
-        return "redirect:/login";
     }
 
 }
