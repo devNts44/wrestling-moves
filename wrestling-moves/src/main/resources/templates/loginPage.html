@@ -11,9 +11,8 @@
 </head>
 <body>
 <div class="login-container">
-  <div class="logo-container text-center">
-    <img src="images/logoWrestling.png" alt="Wrestling logo" 
-         th:src="@{/images/logoWrestling.png}" />
+  <div class="logo-container">
+    🤼
   </div>
 
   <div th:if="${param.error}" class="alert alert-danger">
@@ -27,9 +26,16 @@
   <div class="form-container">
     <h2 class="form-title text-center">Accès à Wrestling Movements</h2>
 
-    <a href="/oauth2/authorization/google">
-      <button>Se connecter avec Google</button>
+    <a href="/oauth2/authorization/google" class="google-btn">
+      <div class="google-icon-wrapper">
+        <img class="google-icon" th:src="@{/images/google-icon.png}" alt="Google"/>
+      </div>
+      <span class="btn-text">Se connecter avec Google</span>
     </a>
+
+    <div class="separator">
+      <span class="separator-text">ou</span>
+    </div>
 
     <form th:action="@{/login}" method="post">
       <div class="form-group">

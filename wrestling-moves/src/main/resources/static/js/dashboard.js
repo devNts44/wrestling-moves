@@ -1,44 +1,38 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Animation au défilement
-    window.addEventListener('scroll', animateCards);
+// Conseils aléatoires
+const tips = [
+    "🎯 Concentrez-vous sur la qualité des prises plutôt que la quantité",
+    "📊 Analysez toujours vos matchs précédents pour progresser",
+    "💧 N'oubliez pas de bien vous hydrater pendant l'entraînement",
+    "⚖️ Travaillez votre équilibre avec des exercices spécifiques",
+    "🔄 Variez vos techniques d'échauffement",
+    "🧘 La récupération est aussi importante que l'entraînement",
+    "💪 Maintenez une routine d'entraînement régulière",
+    "🎯 Fixez-vous des objectifs réalisables à court terme"
+];
 
-    // Initialisation
-    animateCards();
-    setRandomTip();
-    initHoverEffects();
+function showDailyTip() {
+    const tipElement = document.getElementById('dailyTip');
+    const randomTip = tips[Math.floor(Math.random() * tips.length)];
+    tipElement.style.opacity = '0';
+    
+    setTimeout(() => {
+        tipElement.textContent = randomTip;
+        tipElement.style.opacity = '1';
+    }, 200);
+}
+
+document.querySelector('.close-tip').addEventListener('click', () => {
+    const tipContainer = document.querySelector('.daily-tip');
+    tipContainer.style.opacity = '0';
+    setTimeout(() => {
+        tipContainer.style.display = 'none';
+    }, 300);
 });
 
-function animateCards() {
-    document.querySelectorAll('.stat-card').forEach(card => {
-        const position = card.getBoundingClientRect();
-        if (position.top < window.innerHeight - 100) {
-            card.classList.add('animate__animated', 'animate__fadeInUp');
-        }
-    });
-}
-
-function setRandomTip() {
-    const tips = [
-        "Visualisez vos mouvements avant de les exécuter pour améliorer la précision.",
-        "Maintenez un journal d'entraînement pour suivre vos progrès.",
-        "Travaillez votre souplesse 15 minutes par jour pour prévenir les blessures.",
-        "Analysez vos matchs passés pour identifier les points à améliorer.",
-        "Hydratez-vous régulièrement pendant les sessions d'entraînement."
-    ];
-
-    const tipElement = document.getElementById('dailyTip');
-    if (tipElement) {
-        tipElement.textContent = tips[Math.floor(Math.random() * tips.length)];
-    }
-}
-
-function initHoverEffects() {
-    document.querySelectorAll('.action-btn').forEach(btn => {
-        btn.addEventListener('mouseenter', () => {
-            btn.style.transform = 'scale(1.05)';
-        });
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = 'scale(1)';
-        });
-    });
-}
+// Initialisation
+document.addEventListener('DOMContentLoaded', () => {
+    showDailyTip();
+    
+    // Changer le conseil toutes les 24 heures
+    setInterval(showDailyTip, 24 * 60 * 60 * 1000);
+});

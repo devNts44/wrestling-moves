@@ -1,10 +1,10 @@
 :root {
-    --primary-color: #6C63FF;
-    --secondary-color: #2C3E50;
+    --primary-color: #007bff;
+    --secondary-color: #2c3e50;
     --success-color: #2ECC71;
     --warning-color: #F1C40F;
     --danger-color: #E74C3C;
-    --background-color: #F8F9FA;
+    --background-color: #f5f6fa;
     --card-background: #FFFFFF;
 }
 
@@ -15,7 +15,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Inter', sans-serif;
     display: flex;
     background-color: var(--background-color);
     height: 100vh;
@@ -25,7 +25,7 @@ body {
 /* Sidebar Styles */
 .sidebar {
     width: 250px;
-    background: var(--secondary-color);
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
     color: white;
     padding: 2rem 1rem;
     display: flex;
@@ -38,6 +38,8 @@ body {
     gap: 1rem;
     font-size: 1.5rem;
     margin-bottom: 3rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
 }
 
 .nav-links {
@@ -53,10 +55,12 @@ body {
     display: flex;
     align-items: center;
     gap: 1rem;
+    letter-spacing: -0.2px;
 }
 
 .nav-links li:hover, .nav-links li.active {
-    background: var(--primary-color);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
 }
 
 /* Main Content Styles */
@@ -85,14 +89,15 @@ header {
 }
 
 .search-bar input {
-    border: none;
-    outline: none;
-    width: 100%;
-    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.2px;
 }
 
 .add-wrestler {
-    background: var(--primary-color);
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.2px;
+    font-weight: 500;
     color: white;
     border: none;
     padding: 0.8rem 1.5rem;
@@ -143,11 +148,14 @@ header {
 .wrestler-info h3 {
     color: var(--secondary-color);
     margin-bottom: 0.5rem;
+    font-weight: 600;
+    letter-spacing: -0.3px;
 }
 
 .wrestler-id {
     color: #666;
     font-size: 0.9rem;
+    letter-spacing: -0.2px;
 }
 
 .wrestler-stats {

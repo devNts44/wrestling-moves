@@ -1,43 +1,86 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
 <head>
     <title>Wrestling Movements</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
 </head>
-<body>
-
-    <header class="header">
-        <div class="logo-container">
-            <img src="images/logoWrestling.png" alt="Wrestling logo" title="Wrestling logo"
-                 th:src="@{/images/logoWrestling.png}" />
-        </div>
-        <nav class="nav-menu">
-            <a href="#" th:href="@{/login}" class="login-btn">Login</a>
-        </nav>
-    </header>
-    
-    <div class="hero-section">
-        <h1>Welcome to Wrestling Movements</h1>
-        <div class="banner-video">
-            <iframe src="https://www.instagram.com/reel/DEhrASZsGm4/embed" width="400" height="480"></iframe>
-        </div>
+<body class="relative">
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#2c3e50] via-[#34495e] to-[#2c3e50] bg-[length:400%_400%] animate-[gradient_15s_ease_infinite]"></div>
+        <div class="absolute inset-0 backdrop-blur-[100px] opacity-30"></div>
     </div>
 
-<!-- Section principale -->
-<main class="main-content">
-    <section class="intro">
-        <h2>Introduction</h2>
-        <p>Explore various wrestling techniques and improve your skills.</p>
-    </section>
-    
-    <section class="content-grid">
-        <div class="card"> Content Block 1</div>
-        <div class="card">Content Block 2</div>
-        <div class="card">Content Block 3</div>
-    </section>
-</main>
+    <header class="header z-10 relative">
+        <div class="container header-container">
+            <div class="logo-container">
+                <div class="wrestler-icon">🤼</div>
+                <h1 class="header-title">Wrestling Movements</h1>
+            </div>
+            <nav class="nav-menu">
+                <a th:href="@{/login}" class="login-btn">Se connecter</a>
+            </nav>
+        </div>
+    </header>
 
+    <section class="hero-section z-10 relative">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1>Maîtrisez l'Art de la Lutte</h1>
+                <p class="hero-subtitle">Découvrez, apprenez et perfectionnez vos techniques de combat</p>
+            </div>
+            <div class="banner-video">
+                <iframe src="https://www.youtube.com/embed/-XFyYGv_o2Y"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-content z-10 relative">
+        <div class="container">
+            <section class="intro">
+                <h2>Développez Votre Potentiel</h2>
+                <p>Accédez à une bibliothèque complète de techniques de lutte, des mouvements fondamentaux aux stratégies avancées.</p>
+            </section>
+
+            <section class="content-grid">
+                <article class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Techniques Fondamentales</h3>
+                    <p>Maîtrisez les bases essentielles de la lutte avec nos guides détaillés et nos vidéos explicatives.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3>Stratégies Avancées</h3>
+                    <p>Perfectionnez vos compétences tactiques et développez votre style de combat unique.</p>
+                </article>
+
+                <article class="card">
+                    <div class="card-icon">📈</div>
+                    <h3>Entraînement Personnalisé</h3>
+                    <p>Suivez votre progression et atteignez vos objectifs avec notre système de suivi personnalisé.</p>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer z-10 relative">
+        <div class="container">
+            <p>&copy; 2024 Wrestling Movements. Tous droits réservés.</p>
+        </div>
+    </footer>
 </body>
 </html>

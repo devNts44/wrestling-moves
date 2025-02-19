@@ -4,77 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Wrestling Academy</title>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" th:href="@{/css/dashboard.css}">
 </head>
 <body>
 <div class="container py-4">
-    <div class="welcome-section">
-        <div class="text-center">
-            <h1 class="display-4 mb-3">Bienvenue, <span th:text="${username}" class="text-warning"></span> !</h1>
-            <p class="lead">Prêt à dominer le tapis aujourd'hui ? 🏅</p>
+    <div class="welcome-section animate-fade-in">
+        <div class="logo-container animate-bounce">
+            🤼
         </div>
-    </div>
-
-    <div class="row text-center mb-4">
-        <div class="col-md-4">
-            <div class="stat-card bg-white">
-                <div class="card-body">
-                    <i class="fas fa-video stat-icon mb-3"></i>
-                    <h5 class="card-title text-muted">Total Vidéos</h5>
-                    <h2 class="text-primary" th:text="${totalVideos}">0</h2>
-                    <small class="text-success"><i class="fas fa-arrow-up"></i> 12% vs mois dernier</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="stat-card bg-white">
-                <div class="card-body">
-                    <i class="fas fa-tags stat-icon mb-3"></i>
-                    <h5 class="card-title text-muted">Catégories</h5>
-                    <h2 class="text-primary" th:text="${totalCategories}">0</h2>
-                    <div class="progress mt-2" style="height: 4px;">
-                        <div class="progress-bar bg-success" style="width: 75%"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="stat-card bg-white">
-                <div class="card-body">
-                    <i class="fas fa-clock stat-icon mb-3"></i>
-                    <h5 class="card-title text-muted">Dernière Vidéo</h5>
-                    <h4 class="text-primary" th:text="${lastVideo}">Aucune</h4>
-                    <small class="text-muted">2 jours ago</small>
-                </div>
-            </div>
+        <h1 class="welcome-title">Bienvenue, <span th:text="${username}"></span></h1>
+        
+        <!-- Ajout du conseil du jour -->
+        <div class="daily-tip">
+            <i class="fas fa-lightbulb tip-icon"></i>
+            <p id="dailyTip"></p>
+            <button class="close-tip"><i class="fas fa-times"></i></button>
         </div>
     </div>
 
     <div class="row text-center mb-4">
         <div class="col-md-4 mb-3">
-            <a href="/videos/add" class="btn btn-primary action-btn">
+            <a href="/videos/add" class="btn btn-primary action-btn animate-hover">
                 <i class="fas fa-plus mr-2"></i>Ajouter Vidéo
             </a>
         </div>
         <div class="col-md-4 mb-3">
-            <a href="/videos" class="btn btn-secondary action-btn">
+            <a href="/videos" class="btn btn-secondary action-btn animate-hover">
                 <i class="fas fa-play-circle mr-2"></i>Voir Vidéos
             </a>
         </div>
         <div class="col-md-4 mb-3">
-            <a href="/categories" class="btn btn-success action-btn">
+            <a href="/categories" class="btn btn-success action-btn animate-hover">
                 <i class="fas fa-folder-open mr-2"></i>Catégories
             </a>
         </div>
     </div>
 
-    <div class="row mb-4">
+    <div class="row">
         <div class="col">
-            <div class="card shadow">
-                <div class="card-header bg-primary text-white">
+            <div class="card shadow animate-slide-up">
+                <div class="card-header">
                     <h4 class="mb-0"><i class="fas fa-heart mr-2"></i>Vos Favoris</h4>
                 </div>
                 <div class="card-body">
@@ -84,28 +55,15 @@
                            class="video-list-item list-group-item list-group-item-action">
                             <i class="fas fa-play-circle mr-3"></i>
                             <span th:text="${video.title}">Titre vidéo</span>
-                            <span class="badge badge-pill badge-info ml-2" th:text="${video.category}">Catégorie</span>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div class="col">
-            <div class="alert alert-info animated-tip fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert">
-                    <span>&times;</span>
-                </button>
-                <h5 class="alert-heading"><i class="fas fa-lightbulb mr-2"></i>Conseil du Jour</h5>
-                <hr>
-                <p class="mb-0" id="dailyTip">Chargement du conseil...</p>
-            </div>
-        </div>
-    </div>
 </div>
 
+<!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script th:src="@{/js/dashboard.js}"></script>
